@@ -1,3 +1,4 @@
+const mapboxgl = require("mapbox-gl");
 mapboxgl.accessToken = mapToken; // Your Mapbox API token
 console.log(mapToken);
 const map = new mapboxgl.Map({
@@ -9,8 +10,11 @@ const map = new mapboxgl.Map({
 });
 
 // Create a default Marker and add it to the map.
-const marker = new mapboxgl.Marker({color:"red"})
-      .setLngLat(coordinates)
-      .setPopup(new mapboxgl.Popup({offset: 25})
-      .setHTML("<p>Exact location will be provided after booking</p>"))
-      .addTo(map);
+const marker = new mapboxgl.Marker({ color: "red" })
+  .setLngLat(coordinates)
+  .setPopup(
+    new mapboxgl.Popup({ offset: 25 }).setHTML(
+      "<p>Exact location will be provided after booking</p>"
+    )
+  )
+  .addTo(map);
