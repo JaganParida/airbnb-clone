@@ -1,4 +1,3 @@
-const mapboxgl = require("mapbox-gl");
 mapboxgl.accessToken = mapToken; // Your Mapbox API token
 console.log(mapToken);
 const map = new mapboxgl.Map({
