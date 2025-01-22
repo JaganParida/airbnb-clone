@@ -95,7 +95,9 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
 app.all("*", (req, res, next) => {
-  next(new ExpressError(404, "Page Not Found!"));
+  next(
+    new ExpressError(404, "Page Not Found! To view Click on Explore Wanderlust")
+  );
 });
 
 //error handling middlewares
