@@ -23,6 +23,13 @@ body {
 .nav-link {
   color: #222222 !important ;
 }
+.createList {
+  padding: 10px;
+}
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+}
 
 /* footer */
 .f-info-links a {
@@ -308,9 +315,18 @@ button.btn.dropdown-toggle.show {
 .icon i:last-child {
   margin-right: 15px;
 }
+.filters .dragging .filter {
+  user-select: none;
+}
+
 @media (min-width: 320px) and (max-width: 420px) {
   #filterList {
     max-width: 230px;
+  }
+  .navbar-nav {
+    display: flex;
+    margin-top: 5px;
+    align-items: center;
   }
   .tax-toggle {
     width: auto;

@@ -44,7 +44,7 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-//mongo store setup
+// mongo store setup
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
