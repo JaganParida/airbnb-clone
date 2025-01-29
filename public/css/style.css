@@ -330,11 +330,12 @@ button.btn.dropdown-toggle.show {
   }
   .tax-toggle {
     width: auto;
-    font-size: 7px;
+    font-size: 14px;
     margin-left: 20px;
   }
   .form-switch.form-check-reverse .form-check-input {
-    height: 1.2rem;
+    height: 20px;
+    width: 33px;
   }
 }
 @media (min-width: 421px) and (max-width: 600px) {
