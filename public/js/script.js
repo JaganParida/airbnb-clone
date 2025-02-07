@@ -85,14 +85,17 @@ filters.addEventListener("touchstart", startDrag);
 filters.addEventListener("touchmove", onDrag);
 filters.addEventListener("touchend", stopDrag);
 
-// Two-finger scroll behavior
+// Smooth scrolling with two-finger swipe (trackpad)
 filters.addEventListener(
   "wheel",
   (e) => {
     if (e.deltaY === 0) return;
     e.preventDefault();
-    filters.scrollLeft += e.deltaY > 0 ? 200 : -200;
+    filters.scrollBy({ left: e.deltaY > 0 ? 200 : -200, behavior: "smooth" });
     handleIcons();
   },
   { passive: false }
 );
+
+// Enable smooth dragging for touch & mouse
+filters.style.scrollBehavior = "smooth";
