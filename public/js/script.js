@@ -49,19 +49,22 @@ const handleIcons = () => {
 // Scroll with arrow buttons
 arrowIcons.forEach((icon) => {
   icon.addEventListener("click", () => {
-    filters.scrollLeft += icon.id === "left" ? -350 : 350;
+    filters.scrollBy({
+      left: icon.id === "left" ? -350 : 350,
+      behavior: "smooth",
+    });
     handleIcons();
   });
 });
 
-// Two-finger scrolling for desktops (trackpads)
+// Smooth two-finger scrolling for desktops (trackpads)
 filters.addEventListener("wheel", (e) => {
   e.preventDefault();
-  filters.scrollLeft += e.deltaY > 0 ? 100 : -100; // Scroll faster
+  filters.scrollBy({ left: e.deltaY > 0 ? 100 : -100, behavior: "smooth" });
   handleIcons();
 });
 
-// Dragging for touch devices
+// Dragging for touch devices and mouse
 let isDragging = false;
 let startX, startScrollLeft;
 
