@@ -90,10 +90,17 @@ app.use((req, res, next) => {
 });
 
 //use the simple path
+// Redirect root "/" to "/listings"
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
+// Routes
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
+// 404 Error Handler (Keep this at the end)
 app.all("*", (req, res, next) => {
   next(
     new ExpressError(404, "Page Not Found! To view Click on Explore Wanderlust")
