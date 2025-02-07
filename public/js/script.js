@@ -37,6 +37,8 @@ taxSwitch.addEventListener("click", () => {
 /*filters*/
 const filters = document.querySelector("#filters");
 const arrowIcons = document.querySelectorAll(".icon i");
+let isDragging = false;
+let startX, startScrollLeft;
 
 const handleIcons = () => {
   let scrollValue = Math.round(filters.scrollLeft);
@@ -46,54 +48,51 @@ const handleIcons = () => {
     maxScrollableWidth > scrollValue ? "flex" : "none";
 };
 
-// Scroll with arrow buttons
 arrowIcons.forEach((icon) => {
   icon.addEventListener("click", () => {
-    filters.scrollBy({
-      left: icon.id === "left" ? -350 : 350,
-      behavior: "smooth",
-    });
+    filters.scrollLeft += icon.id === "left" ? -350 : 350;
     handleIcons();
   });
 });
 
-// Smooth two-finger scrolling for desktops (trackpads)
-filters.addEventListener("wheel", (e) => {
-  e.preventDefault();
-  filters.scrollBy({ left: e.deltaY > 0 ? 100 : -100, behavior: "smooth" });
-  handleIcons();
-});
-
-// Dragging for touch devices and mouse
-let isDragging = false;
-let startX, startScrollLeft;
-
-const startDragging = (e) => {
+const startDrag = (e) => {
   isDragging = true;
   filters.classList.add("dragging");
-  startX = e.touches ? e.touches[0].pageX : e.pageX;
+  startX = e.pageX || e.touches[0].pageX;
   startScrollLeft = filters.scrollLeft;
 };
 
-const dragging = (e) => {
+const onDrag = (e) => {
   if (!isDragging) return;
-  let currentX = e.touches ? e.touches[0].pageX : e.pageX;
-  let movement = currentX - startX;
-  filters.scrollLeft = startScrollLeft - movement;
+  const x = e.pageX || e.touches[0].pageX;
+  const walk = (x - startX) * 1.5; // Adjust speed
+  filters.scrollLeft = startScrollLeft - walk;
   handleIcons();
 };
 
-const stopDragging = () => {
+const stopDrag = () => {
   isDragging = false;
   filters.classList.remove("dragging");
 };
 
-// Touch and mouse drag events
-filters.addEventListener("mousedown", startDragging);
-filters.addEventListener("mousemove", dragging);
-document.addEventListener("mouseup", stopDragging);
+// Mouse events
+filters.addEventListener("mousedown", startDrag);
+filters.addEventListener("mousemove", onDrag);
+document.addEventListener("mouseup", stopDrag);
 
-// Touch events for mobile devices
-filters.addEventListener("touchstart", startDragging);
-filters.addEventListener("touchmove", dragging);
-filters.addEventListener("touchend", stopDragging);
+// Touch events
+filters.addEventListener("touchstart", startDrag);
+filters.addEventListener("touchmove", onDrag);
+filters.addEventListener("touchend", stopDrag);
+
+// Two-finger scroll behavior
+filters.addEventListener(
+  "wheel",
+  (e) => {
+    if (e.deltaY === 0) return;
+    e.preventDefault();
+    filters.scrollLeft += e.deltaY > 0 ? 200 : -200;
+    handleIcons();
+  },
+  { passive: false }
+);
