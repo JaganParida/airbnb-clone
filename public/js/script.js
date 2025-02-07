@@ -36,35 +36,54 @@ taxSwitch.addEventListener("click", () => {
 
 /*filters*/
 const filters = document.querySelector("#filters");
-arrowIcons = document.querySelectorAll(".icon i");
+const arrowIcons = document.querySelectorAll(".icon i");
 let isDragging = false;
-let isPressed = false;
+let startX, startScrollLeft;
+
 const handleIcons = () => {
-  let scrollVlaue = Math.round(filters.scrollLeft);
+  let scrollValue = Math.round(filters.scrollLeft);
   let maxScrollableWidth = filters.scrollWidth - filters.clientWidth;
-  arrowIcons[0].parentElement.style.display = scrollVlaue > 0 ? "flex" : "none";
+  arrowIcons[0].parentElement.style.display = scrollValue > 0 ? "flex" : "none";
   arrowIcons[1].parentElement.style.display =
-    maxScrollableWidth > scrollVlaue ? "flex" : "none";
+    maxScrollableWidth > scrollValue ? "flex" : "none";
 };
 
 arrowIcons.forEach((icon) => {
   icon.addEventListener("click", () => {
-    //if clicked icon is left, reduce 350 from filters scrollleft else add
+    // If clicked icon is left, reduce 350 from filters scrollLeft else add
     filters.scrollLeft += icon.id === "left" ? -350 : 350;
     handleIcons();
   });
 });
+
+// Dragging logic for mouse and touch events
+const startDragging = (e) => {
+  isDragging = true;
+  filters.classList.add("dragging");
+  startX = e.pageX || e.touches[0].pageX;
+  startScrollLeft = filters.scrollLeft;
+};
+
 const dragging = (e) => {
   if (!isDragging) return;
-  filters.classList.add("dragging");
-  filters.scrollLeft -= e.movementX;
+  e.preventDefault();
+  let currentX = e.pageX || e.touches[0].pageX;
+  let movement = currentX - startX;
+  filters.scrollLeft = startScrollLeft - movement;
   handleIcons();
 };
 
-const dragStop = () => {
+const stopDragging = () => {
   isDragging = false;
   filters.classList.remove("dragging");
 };
-filters.addEventListener("mousedown", () => (isDragging = true));
+
+// Mouse events
+filters.addEventListener("mousedown", startDragging);
 filters.addEventListener("mousemove", dragging);
-document.addEventListener("mouseup", dragStop);
+document.addEventListener("mouseup", stopDragging);
+
+// Touch events for mobile support
+filters.addEventListener("touchstart", startDragging);
+filters.addEventListener("touchmove", dragging);
+filters.addEventListener("touchend", stopDragging);
