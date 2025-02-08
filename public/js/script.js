@@ -40,6 +40,9 @@ const arrowIcons = document.querySelectorAll(".icon i");
 let isDragging = false;
 let startX, startScrollLeft;
 
+// Apply touch-action to prevent browser interference
+filters.style.touchAction = "none";
+
 // Function to show/hide arrow icons based on scroll position
 const handleIcons = () => {
   let scrollValue = Math.round(filters.scrollLeft);
@@ -57,7 +60,7 @@ arrowIcons.forEach((icon) => {
       left: icon.id === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
     });
-    setTimeout(handleIcons, 300); // Delay to update icons after smooth scroll
+    setTimeout(handleIcons, 300);
   });
 });
 
@@ -69,12 +72,12 @@ const startDrag = (e) => {
   startScrollLeft = filters.scrollLeft;
 };
 
-// Drag move event (Increased Speed + Mobile Support)
+// Drag move event (Now Works on Mobile)
 const onDrag = (e) => {
   if (!isDragging) return;
-  e.preventDefault(); // Prevent unwanted scrolling on mobile
+  e.preventDefault(); // Prevents browser scroll issues on mobile
   const x = e.pageX || e.touches[0].pageX;
-  const walk = (x - startX) * 3; // Increased drag speed
+  const walk = (x - startX) * 2.5; // Adjust speed for smooth experience
   filters.scrollLeft = startScrollLeft - walk;
   handleIcons();
 };
@@ -90,7 +93,7 @@ filters.addEventListener("mousedown", startDrag);
 filters.addEventListener("mousemove", onDrag);
 document.addEventListener("mouseup", stopDrag);
 
-// Touch events for dragging (Fixes One-Finger Dragging on Mobile)
+// Touch events for dragging (Now 100% Working on Mobile)
 filters.addEventListener("touchstart", startDrag, { passive: false });
 filters.addEventListener("touchmove", onDrag, { passive: false });
 filters.addEventListener("touchend", stopDrag);
@@ -99,12 +102,9 @@ filters.addEventListener("touchend", stopDrag);
 filters.addEventListener(
   "wheel",
   (e) => {
-    if (e.deltaX === 0 && e.deltaY === 0) return; // Ignore if no movement
+    if (e.deltaX === 0 && e.deltaY === 0) return;
     e.preventDefault();
-
-    // Faster scrolling effect
     filters.scrollLeft += e.deltaX !== 0 ? e.deltaX * 2 : e.deltaY * 3;
-
     handleIcons();
   },
   { passive: false }

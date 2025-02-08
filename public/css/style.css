@@ -207,8 +207,15 @@ button.btn.dropdown-toggle.show {
 #filters {
   display: flex;
   align-items: center;
-  overflow-x: hidden;
+  overflow-x: auto; /* Changed from hidden to auto for proper scrolling */
   scroll-behavior: smooth;
+  touch-action: none; /* Prevents browser from blocking touch events */
+  -webkit-overflow-scrolling: touch; /* Improves smooth scrolling on mobile */
+  scrollbar-width: none; /* Hides scrollbar for a cleaner look */
+}
+
+#filters::-webkit-scrollbar {
+  display: none; /* Hides scrollbar for WebKit browsers */
 }
 
 #filters.dragging {
