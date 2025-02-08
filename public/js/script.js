@@ -61,7 +61,7 @@ arrowIcons.forEach((icon) => {
   });
 });
 
-// Drag start event
+// Drag start event (Works on both Mouse & Touch)
 const startDrag = (e) => {
   isDragging = true;
   filters.classList.add("dragging");
@@ -69,9 +69,10 @@ const startDrag = (e) => {
   startScrollLeft = filters.scrollLeft;
 };
 
-// Drag move event (Increased Speed)
+// Drag move event (Increased Speed + Mobile Support)
 const onDrag = (e) => {
   if (!isDragging) return;
+  e.preventDefault(); // Prevent unwanted scrolling on mobile
   const x = e.pageX || e.touches[0].pageX;
   const walk = (x - startX) * 3; // Increased drag speed
   filters.scrollLeft = startScrollLeft - walk;
@@ -89,9 +90,9 @@ filters.addEventListener("mousedown", startDrag);
 filters.addEventListener("mousemove", onDrag);
 document.addEventListener("mouseup", stopDrag);
 
-// Touch events for dragging
-filters.addEventListener("touchstart", startDrag);
-filters.addEventListener("touchmove", onDrag);
+// Touch events for dragging (Fixes One-Finger Dragging on Mobile)
+filters.addEventListener("touchstart", startDrag, { passive: false });
+filters.addEventListener("touchmove", onDrag, { passive: false });
 filters.addEventListener("touchend", stopDrag);
 
 // Smooth scrolling with trackpad (two-finger swipe)
