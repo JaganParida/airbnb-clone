@@ -40,6 +40,7 @@ const arrowIcons = document.querySelectorAll(".icon i");
 let isDragging = false;
 let startX, startScrollLeft;
 
+// Function to show/hide arrow icons based on scroll position
 const handleIcons = () => {
   let scrollValue = Math.round(filters.scrollLeft);
   let maxScrollableWidth = filters.scrollWidth - filters.clientWidth;
@@ -48,13 +49,19 @@ const handleIcons = () => {
     maxScrollableWidth > scrollValue ? "flex" : "none";
 };
 
+// Click event for left and right arrows (One-by-One Fast Scrolling)
 arrowIcons.forEach((icon) => {
   icon.addEventListener("click", () => {
-    filters.scrollLeft += icon.id === "left" ? -350 : 350;
-    handleIcons();
+    let scrollAmount = filters.clientWidth / 4; // Scroll one item at a time
+    filters.scrollBy({
+      left: icon.id === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+    setTimeout(handleIcons, 300); // Delay to update icons after smooth scroll
   });
 });
 
+// Drag start event
 const startDrag = (e) => {
   isDragging = true;
   filters.classList.add("dragging");
@@ -62,40 +69,45 @@ const startDrag = (e) => {
   startScrollLeft = filters.scrollLeft;
 };
 
+// Drag move event (Increased Speed)
 const onDrag = (e) => {
   if (!isDragging) return;
   const x = e.pageX || e.touches[0].pageX;
-  const walk = (x - startX) * 1.5; // Adjust speed
+  const walk = (x - startX) * 3; // Increased drag speed
   filters.scrollLeft = startScrollLeft - walk;
   handleIcons();
 };
 
+// Drag stop event
 const stopDrag = () => {
   isDragging = false;
   filters.classList.remove("dragging");
 };
 
-// Mouse events
+// Mouse events for dragging
 filters.addEventListener("mousedown", startDrag);
 filters.addEventListener("mousemove", onDrag);
 document.addEventListener("mouseup", stopDrag);
 
-// Touch events
+// Touch events for dragging
 filters.addEventListener("touchstart", startDrag);
 filters.addEventListener("touchmove", onDrag);
 filters.addEventListener("touchend", stopDrag);
 
-// Smooth scrolling with two-finger swipe (trackpad)
+// Smooth scrolling with trackpad (two-finger swipe)
 filters.addEventListener(
   "wheel",
   (e) => {
-    if (e.deltaY === 0) return;
+    if (e.deltaX === 0 && e.deltaY === 0) return; // Ignore if no movement
     e.preventDefault();
-    filters.scrollBy({ left: e.deltaY > 0 ? 200 : -200, behavior: "smooth" });
+
+    // Faster scrolling effect
+    filters.scrollLeft += e.deltaX !== 0 ? e.deltaX * 2 : e.deltaY * 3;
+
     handleIcons();
   },
   { passive: false }
 );
 
-// Enable smooth dragging for touch & mouse
-filters.style.scrollBehavior = "smooth";
+// Disable smooth behavior for fast snapping while dragging
+filters.style.scrollBehavior = "auto";
