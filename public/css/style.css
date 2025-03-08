@@ -14,7 +14,11 @@ body {
   /* height: 5rem; */
   background-color: white;
 }
-
+.navbar-nav {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
 .fa-compass {
   color: #fe424d;
   font-size: 2rem;
@@ -133,6 +137,7 @@ body {
   padding: 4px;
   border: 1px solid #ddd;
   border-radius: 25px;
+  height: fit-content;
 }
 .dropdown:hover {
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
@@ -143,12 +148,20 @@ button.btn.dropdown-toggle::after {
 .dropdown .btn i {
   margin-left: 2px;
 }
+
+.dropdown-toggle svg {
+  height: 100% !important;
+  max-height: 32px !important;
+}
+
 button.btn.dropdown-toggle.show {
   border: none;
 }
 
 .btn.dropdown-toggle {
   border: none;
+  display: inline-flex;
+  align-items: center;
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -187,14 +200,15 @@ button.btn.dropdown-toggle.show {
 .create-list {
   border-radius: 30px;
   font-size: 14px;
-  padding: 0px 5px 0px 5px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #ebebeb;
 }
 
 .create-list:hover {
-  background-color: rgb(255, 255, 232);
+  background-color: rgb(255, 255, 66);
 }
 
 /*filters*/
@@ -207,15 +221,15 @@ button.btn.dropdown-toggle.show {
 #filters {
   display: flex;
   align-items: center;
-  overflow-x: auto; /* Changed from hidden to auto for proper scrolling */
+  overflow-x: auto;
   scroll-behavior: smooth;
-  touch-action: none; /* Prevents browser from blocking touch events */
-  -webkit-overflow-scrolling: touch; /* Improves smooth scrolling on mobile */
-  scrollbar-width: none; /* Hides scrollbar for a cleaner look */
+  touch-action: none;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
 #filters::-webkit-scrollbar {
-  display: none; /* Hides scrollbar for WebKit browsers */
+  display: none;
 }
 
 #filters.dragging {
@@ -305,17 +319,47 @@ button.btn.dropdown-toggle.show {
   user-select: none;
 }
 
+#filterby {
+  height: 45px;
+  width: 80px;
+  display: inline-flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid #a2a2a2;
+  border-radius: 1rem;
+}
+
+.another {
+  display: inline-flex;
+  align-items: center;
+  width: 100vw;
+}
 .tax-toggle {
   border: 1px solid #ddd;
   border-radius: 1rem;
-  padding: 15px;
+  padding: 15px 64px;
   display: flex;
   align-items: center;
   margin-left: 20px;
+  height: 45px;
+  width: max-content;
+  background-color: rgb(248, 248, 248);
+  cursor: pointer;
+}
+.tax-toggle label {
+  text-align: center;
+}
+
+.form-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .tax-toggle:hover {
   border: 1px solid #000;
+  background-color: rgb(248, 248, 248, 0.5);
+  cursor: pointer;
 }
 
 .form-switch.form-check-reverse .form-check-input {
@@ -328,6 +372,7 @@ button.btn.dropdown-toggle.show {
 .form-switch.form-check-reverse {
   padding-right: 0;
 }
+
 @media (min-width: 320px) and (max-width: 420px) {
   .navbar-nav {
     display: flex;
