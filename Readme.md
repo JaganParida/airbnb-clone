@@ -4,6 +4,8 @@ Welcome to **WanderLodge**, a full-stack web application inspired by **Airbnb**.
 
 ## 🌍 Live Project
 
+Check out the live project: [WanderLodge-webApp](https://wanderlust-project-mcgi.onrender.com)
+
 Check out the repository: [WanderLodge GitHub](https://github.com/JaganParida/FullStack-Project)
 
 ## 🚀 Features
