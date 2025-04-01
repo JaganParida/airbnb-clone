@@ -112,3 +112,8 @@ filters.addEventListener(
 
 // Disable smooth behavior for fast snapping while dragging
 filters.style.scrollBehavior = "auto";
+
+/*preloader*/
+window.addEventListener("load", function () {
+  document.getElementById("preloader").style.display = "none";
+});
