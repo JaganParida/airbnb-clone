@@ -34,6 +34,9 @@ body {
   display: flex;
   flex-direction: row;
 }
+.navbar-nav .dropdown-menu {
+  position: none;
+}
 
 /* footer */
 .f-info-links a {
