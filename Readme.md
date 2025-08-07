@@ -2,12 +2,6 @@
 
 Welcome to **WanderLodge**, a full-stack web application inspired by **Airbnb**. This platform allows users to explore, create, review, and manage lodging listings. Built using **HTML, CSS, JavaScript, MongoDB, Node.js, Express.js, EJS, and Bootstrap**, it provides a seamless experience for travelers and hosts alike. Additionally, **Cloudinary** is used for image storage, and **Mapbox** is integrated to display locations on an interactive map.
 
-## 🌍 Live Project
-
-Check out the live project: [WanderLodge-webApp](https://wanderlust-project-mcgi.onrender.com)
-
-Check out the repository: [WanderLodge GitHub](https://github.com/JaganParida/FullStack-Project)
-
 ## 🚀 Features
 
 - **User Authentication**: Secure login and registration system.
@@ -16,14 +10,6 @@ Check out the repository: [WanderLodge GitHub](https://github.com/JaganParida/Fu
 - **Image Uploads**: Integrated with **Cloudinary** for storing and managing images.
 - **Interactive Maps**: Utilizes **Mapbox** for displaying locations dynamically.
 - **Responsive Design**: Built with **Bootstrap** for a user-friendly experience across all devices.
-
-## 🛠️ Technologies Used
-
-- **Front-End**: HTML, CSS, JavaScript, Bootstrap, EJS
-- **Back-End**: Node.js, Express.js
-- **Database**: MongoDB
-- **Cloud Storage**: Cloudinary
-- **Mapping Service**: Mapbox
 
 ## 📂 Project Setup
 
@@ -52,5 +38,7 @@ Check out the repository: [WanderLodge GitHub](https://github.com/JaganParida/Fu
    ```sh
    http://localhost:3000
    ```
+
+##
 
 Thank you for checking out **WanderLodge**! 🚀
