@@ -1,4 +1,4 @@
-# WanderLodge - Full-Stack Web Application
+# WanderLodge - Full-Stack Web Application(On Process...)
 
 Welcome to **WanderLodge**, a full-stack web application inspired by **Airbnb**. This platform allows users to explore, create, review, and manage lodging listings. Built using **HTML, CSS, JavaScript, MongoDB, Node.js, Express.js, EJS, and Bootstrap**, it provides a seamless experience for travelers and hosts alike. Additionally, **Cloudinary** is used for image storage, and **Mapbox** is integrated to display locations on an interactive map.
 
